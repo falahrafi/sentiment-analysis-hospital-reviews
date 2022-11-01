@@ -23,6 +23,10 @@ def home():
 	return render_template('home.html')
 
 
+@app.route('/coba')
+def coba():
+	return render_template('result.html', prediction=0)
+
 @app.route('/predict', methods=['POST'])
 def predict():
 	
