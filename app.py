@@ -10,6 +10,8 @@ from nltk.corpus import stopwords
 import nltk
 import re
 import string
+import sys
+import logging
 # from sklearn.externals import joblib
 
 
@@ -121,6 +123,8 @@ def predict():
 	return render_template('result.html',prediction = my_pred)
 
 
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 if __name__ == '__main__':
 	app.run(debug=True)
