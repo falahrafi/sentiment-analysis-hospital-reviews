@@ -123,3 +123,84 @@ body {
    height: 6px;
    background-color: #E43131;
 }
+
+
+
+/* BREAKPOINTS */
+
+/* [XXL] Extra Extra large devices | 1400px < | */
+@media only screen and (min-width: 1400px) {
+
+}
+
+/* [XL] Extra large devices (large laptops and desktops) | < 1400px | */
+@media only screen and (max-width: 1400px) {
+
+}
+
+/* [LG] Large devices (laptops/desktops) | < 1200px | */
+@media only screen and (max-width: 1200px) {
+   .container-input-text span {
+      display: block;
+      text-align: center;
+      margin-bottom: 16px;
+   }
+   .container-input-text textarea {
+      margin-bottom: 64px;
+   }
+}
+
+/* [MD] Medium devices (landscape tablets) | < 992px | */
+@media only screen and (max-width: 992px) {
+
+}
+
+/* [SM] Small devices (portrait tablets and large phones) | < 768px | */
+@media only screen and (max-width: 768px) {
+   .container-input-text{
+      padding: 0 36px;
+   }
+   .container-input-text textarea {
+      margin-bottom: 56px;
+   }
+   #resultText {
+      font-size: 30px;
+   }   
+}
+
+/* [XS] Extra small devices (phones) | < 576px | */
+@media only screen and (max-width: 576px) {
+   .black-bg{
+      border-radius: 30px;
+   }
+
+   .main-content h1 {
+      font-size: 40px;
+   }
+   .main-content p {
+      font-size: 16px;
+   }
+
+   .container-input-text{
+      margin-top: 48px;
+      padding: 0 24px;
+   }
+   .container-input-text span {
+      display: block;
+      text-align: center;
+      margin-bottom: 16px;
+   }
+   .container-input-text textarea {
+      margin-bottom: 64px;
+   }
+
+   .container-result {
+      padding: 0 24px;
+   }
+   #resultText {
+      font-size: 24px;
+   }
+   #resultLine {
+      width: 30px;
+   }
+}

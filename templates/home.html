@@ -33,10 +33,10 @@
          <div class="container">
 
             <form action="{{ url_for('predict')}}" method="POST" id="formAnalyze">
-               <div class="row">
-                  <div class="col-12 black-bg">
+               <div class="row px-4 px-md-0">
+                  <div class="col-md-12 black-bg">
                      <div class="row">
-                        <div class="col-md-4 offset-md-1 main-content">
+                        <div class="col-md-4 offset-md-1 main-content text-center text-md-start">
                            <h1>Sentiment <span style="color:#1DCC7C;">Analysis</span></h1>
                            <p class="mt-5"><b>Hospital Reviews</b></p>
                            <p>in Semarang, Indonesia</p>
@@ -51,7 +51,7 @@
                            </a>
                         </div>
 
-                        <div class="col-md-5 offset-md-1 container-input-text">
+                        <div class="col-12 offset-0 col-md-5 offset-md-1 container-input-text">
                            <span class="try-this">Try this:</span>
                            <span id="exNeg" class="input-example">Very expensive</span>
                            <span id="exPos" class="input-example">The nurse is so kind</span>                           
@@ -119,18 +119,41 @@
 
             var form = $(this);
             var actionUrl = form.attr('action');
-            
+            var cWidth = $(window).width();
             $.ajax({
                type: "POST",
                url: actionUrl,
                data: form.serialize(), // serializes the form's elements.
                success: function(data)
                {
-                  console.log(data);
+                  // console.log(data);
                   $('.container-result').show();
+                  // $('#resultIllustration').addClass('ri-size-bigger'); 
                   $('#resultIllustration').animate({
-                     height: "400px"
-                  }, 700);   
+                     height: "400px",
+                  },{
+                     duration:700,
+                     step:function(){
+                        // SET BREAKPOINTS
+                        // console.log(cWidth);
+                        if(cWidth<768){
+                           $('#resultIllustration').animate({                              
+                              height: "300px",
+                           });
+                        }                        
+                        if(cWidth<576){
+                           $('#resultIllustration').animate({                              
+                              height: "200px",
+                           });
+                        }
+                        if(cWidth<250){
+                           $('#resultIllustration').animate({                              
+                              height: "100px",
+                           });
+                        }                        
+                     }
+                  }); 
+
                   if(data == "0"){
                      $("#resultIllustration").attr('src','/static/images/negative-illustration.png');
                      $("#resultText").text('NEGATIVE');
