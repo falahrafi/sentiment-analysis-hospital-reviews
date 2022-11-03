@@ -1,0 +1,125 @@
+::-moz-selection {
+   /* Code for Firefox */
+   color: white;
+   background: #1DCC7C;
+}
+
+::selection {
+   color: white;
+   background: #1DCC7C;
+}
+
+body {
+   color: #141414;
+   font-family: 'Nunito Sans', sans-serif;   
+}
+
+
+.black-bg {
+   min-height: 460px;
+   background: #141414 url("/static/images/bg-blur.png") repeat center 20%;
+   /* background-size: cover; */
+   border-radius: 64px;
+   box-shadow: 0 6px 30px 0px rgba(63, 63, 63, 0.3);
+}
+
+.falahrafi-logo {
+   margin-top: 30px;
+   margin-bottom: 30px;
+   z-index: 10;
+}
+
+.main-content h1 {
+   color: white;
+   font-family: 'Maven Pro', sans-serif;
+   font-size: 56px;
+   margin-top: 80px;
+}
+
+.main-content p {
+   color: white;
+   font-size: 18px;
+   margin-bottom: 0;
+}
+
+.container-btn {
+   margin-top: -26px;
+}
+
+.btn-analyze {
+   background-image: linear-gradient(to right, #1AAE6B, #1FDB85, #1FDB85, #1AAE6B);
+   background-position: left;
+   background-size: 200%;
+   border-radius: 32px;
+   box-shadow: 0 6px 30px 0px rgba(0, 239, 159, 0.3);
+   color: white;
+   font-size: 24px;
+   font-weight: 700;
+   transition: all 0.3s ease-in-out;
+}
+.btn-analyze:hover {
+   background-position: right;
+   color: white;
+   font-size: 26px;
+}
+
+.container-input-text {
+   margin-top: 90px;
+}
+
+.try-this {
+   margin-left: 12px;
+   color: white;
+   font-family: 'Maven Pro', sans-serif;
+   font-size: 18px;   
+}
+
+.input-example {
+   padding: 6px 14px;
+   margin-left: 8px;
+   background: rgba(31, 219, 133, 0.4);
+   border-radius: 30px;
+   color: white;
+   cursor: pointer;
+   font-size: 14px;
+   transition: all 0.3s ease-in-out;
+}
+.input-example:hover {
+   background: rgba(31, 219, 133, .8);
+   font-size: 16px;
+}
+
+.input-text {
+   width: 100%;
+   margin-top: 24px;
+   border: 4px solid #1DCC7C;
+   border-radius: 24px;
+   font-size: 21px;
+}
+
+#result {
+   margin-top: 70px;
+   margin-bottom: 100px;   
+}
+
+.container-result {
+   font-size: 20px;
+   font-weight: 700;
+}
+
+.container-result h4 {
+   font-family: 'Maven Pro', sans-serif;
+   font-size: 36px;
+}
+
+.under-text-line-p {
+   width: 60px;
+   height: 6px;
+   background-color: #1DCC7C;
+}
+
+.under-text-line-n {
+   width: 60px;
+   height: 6px;
+   background-color: #E43131;
+}

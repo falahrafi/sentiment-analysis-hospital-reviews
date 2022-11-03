@@ -1,225 +1,155 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Sentiment Analysis of Hospital Services</title>
-	<!-- <link rel="stylesheet" type="text/css" href="../static/css/styles.css"> -->
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="SMS Spam Filter  Spam  Ham">
-    <meta name="description" content="Spam or Ham SMS Filter">
-    
-    <link rel="icon" type="image/png" href="" />
-    
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Sentiment Analysis - Hospital Reviews</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@700&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet"> 
+      <link rel="stylesheet" href="{{ url_for('static',filename='styles/home.css') }}">
+      <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+   </head>
+   <body>
 
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}"> -->
-	<style type="text/css">
-		.btn {
-  font-size: 1.2em;
-  border-radius: 5px;
-  padding: 12px 30px;
-  background: #fcc316;
-  text-transform: uppercase;
-    margin-top: 10px;
-}
-
-.card-header{
-    width:100%;
-	color:#2196F3;
-    border-bottom:3px solid #BBB;
-    
-    font-family: 'Roboto', sans-serif;
-    padding:10px;
-    text-align: center;
-    margin-top:0px;
-    overflow:hidden;
-    -webkit-transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
-}
-
-.card {
-    background:#FFF;
-    display: block;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    float: none;
-    display: flex;
-    border:1px solid #AAA;
-    border-bottom:3px solid #BBB;
-    padding:10px;
-    margin-top:5em;
-    overflow:hidden;
-    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    font-family: 'Roboto', sans-serif;
-    -webkit-transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-}
-
-.card-body{
- margin:1em;   
-}
-	</style>
-</head>
-<body>
-
-	<header>
-		
-	
-
-
-<div class="jumbotron jumbotron-fluid p-y-3">
-      <div class="container text-xs-center text-white">
-        <a href="https://github.com/maladeep/sms-spam-ham-detector" target="_blank" title="View code at Github"> <ion-icon name="logo-github" size="large"></ion-icon></a>
-
-        <h1 class="display-1 card-header" align="center" style="color:#2196F3;">Sentiment Analysis  </h1>
-        <p class="lead" align="center"> Hospital services in Semarang, Indonesia.  </p>
-        
-      </div>
-    </div>
-
-
-
-
-
-</header>
-
-
-	<div class="container">
-<div class="well">
-		<form action="{{ url_for('predict')}}" method="POST" align="center">
-		<p class="lead">Enter Your SMS below</p>
-		
-		<textarea name="message" rows="4" cols="50" placeholder="Try: Hey baby, I love you!" required="required"></textarea>
-		<br/>
-
-		<input type="submit" class="btn-info btn" value="Let's Check" >
-		
-	</form>
-		
-	</div>
-
-</div>
-<div class="container">
-
-
-<div class="col-md-6">
-            <div class="card center">
-                    <div class="card-content">
-                      <div class="card-header">
-                           <h1 class="card-heading"> Project Detail</h1>
-                        </div>
-                        <div class="card-body">
-                        <p class="card-p">
-                                The dataset for this project is taken from  <a href="https://archive.ics.uci.edu/ml/datasets/sms+spam+collection" target="_blank">UCI Machine Learning</a>
-
-<div class="col-md-4">
-  <b>Technology Used:  </b>
-  <ol>                          
-  <li>Language
-    <ol type="a">
-      <li>Python</li>
-      <li>HTML </li>
-      <li>CSS </li>
-      <li>Bootstrap</li>
-    </ol>
-  </li>
-  <li>Libraries
-    <ol type="a">
-      <li>Flask</li>
-      <li>Sklearn </li>
-      <li>Pandas </li>
-      
-    </ol>
-  </li>
-  
-</ol>
-
-</div>
-
-<div class="col-md-8">
- <b> Action Performed</b>
-  <ol>                            
-  <li>EDA
-  </li>
-  <li>Algorithms Used
-    <ol type="a">
-      <li >Bagging Classification</li>
-      <li>Random Forest Classification </li>
-      <li>Extra Tree Classification </li>
-      <li>Naive Bayes classification</li>
-      <li>Decision tree Classification</li>
-      <li>KNeighbors Classification</li>
-      <li>SVM Classification</li> 
-    </ol>
-  </li>
-  
-</ol>
-
-
-
-</div>
-<i>Based on accuracy, Naive Bayes classification outperform all, Thus this model is based on Naive Bayes classification algorithm.</i>
-  
-                          
-
-
-                                
-                            </p>
-                      </div>
-                      
-                       
-                    </div>
-                </div>
+      <!-- BEGIN: Logo -->
+      <section>
+         <div class="container">
+            <div class="row">
+               <div class="col-12 text-center">
+                  <img src="{{ url_for('static',filename='images/falahrafi-logo.png') }}" alt="Falahrafi Logo" height="42px" class="falahrafi-logo">
+               </div>
             </div>
-  
-
-<div class="col-md-6">
-        		<div class="card center">
-                    <div class="card-content">
-                    	<div class="card-header">
-                           <h1 class="card-heading"> About this project</h1>
-                       	</div>
-                       	<div class="card-body">
-                     	  <p class="card-p">
-                                This was the  project for the  partial fulfillment of IV/I year/semester Artificial Intelligence course (COMP 472), Computer Science.
-<br>
-<br>
-                                    <i>Based on the instructor's feedbacks the project was updated.</i>
-                                
-                            </p>
-                     	</div>
-                     	
-                     	<nav class="nav-tabs">
-                     		<ul class="nav nav-pills center">
-                                <li class="card-action"><u>Course Instructor</u> <a href="#">Santosh Khanal</a></li>
-                             
-                                  <li class="card-action"><u> Design & Develop </u> <a href="https://github.com/maladeep" target="_blank"> Mala Deep</a> </li>
-                              
-                            </ul>
-                     		
-                     	</nav>
-                     		
-                    </div>
-                </div>
-           	</div>
+         </div>
+      </section>
+      <!-- END: Logo -->
 
 
+      <!-- BEGIN: Main -->
+      <section>
+         <div class="container">
 
-</div>
+            <form action="{{ url_for('predict')}}" method="POST" id="formAnalyze">
+               <div class="row">
+                  <div class="col-12 black-bg">
+                     <div class="row">
+                        <div class="col-md-4 offset-md-1 main-content">
+                           <h1>Sentiment <span style="color:#1DCC7C;">Analysis</span></h1>
+                           <p class="mt-5"><b>Hospital Reviews</b></p>
+                           <p>in Semarang, Indonesia</p>
+                           <img
+                              src="{{ url_for('static',filename='images/github-logo.png') }}"
+                              alt="Github Logo"
+                              class="mt-4"
+                              height="42px"
+                           >
+                        </div>
+
+                        <div class="col-md-5 offset-md-1 container-input-text">
+                           <span class="try-this">Try this:</span>
+                           <span id="exNeg" class="input-example">Very expensive</span>
+                           <span id="exPos" class="input-example">The nurse is so kind</span>                           
+                           <textarea name="message" id="inputText" class="form-control input-text" rows="6"></textarea>
+                        </div>                                   
+                     </div>                
+                  </div>              
+               </div>
+
+               <div class="container-btn text-center">
+                  <button type="submit" id="btnAnalyze" class="btn btn-analyze px-5 py-2">
+                     <span id="btnAnalyzeText">Analyze</span> &nbsp;
+                     <i id="btnAnalyzeSearch" class="fas fa-search"></i>
+
+                     <div id="btnAnalyzeSpin" class="spinner-grow" role="status" style="width:24px; height:24px;">
+                        <span class="visually-hidden">Loading...</span>
+                     </div>                                          
+                  </button>
+               </div>
+            </form>
+
+         </div>
+      </section>
+      <!-- END: Main -->
 
 
+      <!-- BEGIN: Result -->
+      <section id="result">
+      <div class="container">
+         <div class="row">
+            <div class="col-12 container-result text-center">
+               <p>Result:</p>
+               <img id="resultIllustration" src="" alt="Result Illustration" height="0px">
+               <h4 id="resultText" class="mt-2">POSITIVE</h4>
+               <div id="resultLine" class="mx-auto"></div>
+            </div>
+         </div>
+      </div>
+      </section>
+      <!-- END: Result -->
+
+      <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+      <script>
+         $('.container-result').hide();         
+         $('#btnAnalyzeSpin').hide();
+
+         $('#exNeg').click(function (e) {
+            $('#inputText').val($('#exNeg').text());
+         });
+
+         $('#exPos').click(function (e) {
+            $('#inputText').val($('#exPos').text());
+         });         
+
+         // this is the id of the form
+         $("#formAnalyze").submit(function(e) {
+
+            $('#btnAnalyzeText').text('Analyzing...');
+            $('#btnAnalyzeSearch').hide();
+            $('#btnAnalyzeSpin').show();
+            $("#resultIllustration").height(0);         
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.    
+
+            var form = $(this);
+            var actionUrl = form.attr('action');
+            
+            $.ajax({
+               type: "POST",
+               url: actionUrl,
+               data: form.serialize(), // serializes the form's elements.
+               success: function(data)
+               {
+                  console.log(data);
+                  $('.container-result').show();
+                  $('#resultIllustration').animate({
+                     height: "400px"
+                  }, 700);   
+                  if(data == "0"){
+                     $("#resultIllustration").attr('src','/static/images/negative-illustration.png');
+                     $("#resultText").text('NEGATIVE');
+                     $("#resultLine").removeClass("under-text-line-p");
+                     $("#resultLine").addClass("under-text-line-n");
+                  } else {
+                     $("#resultIllustration").attr('src','/static/images/positive-illustration.png');
+                     $("#resultText").text('POSITIVE');
+                     $("#resultLine").removeClass("under-text-line-n");
+                     $("#resultLine").addClass("under-text-line-p");
+                  }
 
 
-	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-	
-
-</body>
+                  $('html, body').animate({
+                     scrollTop: $("#result").offset().top
+                  }, 600);   
+                  
+                  $('#btnAnalyzeText').text('Analyze');
+                  $('#btnAnalyzeSearch').show();
+                  $('#btnAnalyzeSpin').hide();                    
+               }
+            });
+            
+         });                           
+      </script>
+   </body>
 </html>
