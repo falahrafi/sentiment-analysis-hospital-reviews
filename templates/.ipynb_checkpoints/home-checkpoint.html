@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Sentiment Analysis - Hospital Reviews</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@700&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet"> 
+      <link rel="stylesheet" href="{{ url_for('static',filename='styles/home.css') }}">
+      <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+   </head>
+   <body>
+
+      <!-- BEGIN: Logo -->
+      <section>
+         <div class="container">
+            <div class="row">
+               <div class="col-12 text-center">
+                  <a href="">
+                     <img src="{{ url_for('static',filename='images/falahrafi-logo.png') }}" alt="Falahrafi Logo" height="42px" class="falahrafi-logo">                     
+                  </a>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- END: Logo -->
+
+
+      <!-- BEGIN: Main -->
+      <section>
+         <div class="container">
+
+            <form action="{{ url_for('predict')}}" method="POST" id="formAnalyze">
+               <div class="row px-4 px-md-0">
+                  <div class="col-md-12 black-bg">
+                     <div class="row">
+                        <div class="col-md-4 offset-md-1 main-content text-center text-md-start">
+                           <h1>Sentiment <span style="color:#1DCC7C;">Analysis</span></h1>
+                           <p class="mt-5"><b>Hospital Reviews</b></p>
+                           <p>in Semarang, Indonesia</p>
+                           <a href="https://github.com/falahrafi/sentiment-analysis-hospital-reviews"
+                           target="_blank">
+                              <img
+                                 src="{{ url_for('static',filename='images/github-logo.png') }}"
+                                 alt="Github Logo"
+                                 class="mt-4"
+                                 height="42px"
+                              >                              
+                           </a>
+                        </div>
+
+                        <div class="col-12 offset-0 col-md-5 offset-md-1 container-input-text">
+                           <span class="try-this">Try this:</span>
+                           <span id="exNeg" class="input-example">Very expensive</span>
+                           <span id="exPos" class="input-example">The nurse is so kind</span>                           
+                           <textarea name="message" id="inputText" class="form-control input-text" rows="6"></textarea>
+                        </div>                                   
+                     </div>                
+                  </div>              
+               </div>
+
+               <div class="container-btn text-center">
+                  <button type="submit" id="btnAnalyze" class="btn btn-analyze px-5 py-2">
+                     <span id="btnAnalyzeText">Analyze</span> &nbsp;
+                     <i id="btnAnalyzeSearch" class="fas fa-search"></i>
+
+                     <div id="btnAnalyzeSpin" class="spinner-grow" role="status" style="width:24px; height:24px;">
+                        <span class="visually-hidden">Loading...</span>
+                     </div>                                          
+                  </button>
+               </div>
+            </form>
+
+         </div>
+      </section>
+      <!-- END: Main -->
+
+
+      <!-- BEGIN: Result -->
+      <section id="result">
+      <div class="container">
+         <div class="row">
+            <div class="col-12 container-result text-center">
+               <p>Result:</p>
+               <img id="resultIllustration" src="" alt="Result Illustration" height="0px">
+               <h4 id="resultText" class="mt-2">POSITIVE</h4>
+               <div id="resultLine" class="mx-auto"></div>
+            </div>
+         </div>
+      </div>
+      </section>
+      <!-- END: Result -->
+
+      <img src="/static/images/positive-illustration.png" alt="" height="400px" style="display: none;">
+      <img src="/static/images/negative-illustration.png" alt="" height="400px" style="display: none;">
+
+      <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+      <script>
+         $('.container-result').hide();         
+         $('#btnAnalyzeSpin').hide();
+
+         $('#exNeg').click(function (e) {
+            $('#inputText').val($('#exNeg').text());
+         });
+
+         $('#exPos').click(function (e) {
+            $('#inputText').val($('#exPos').text());
+         });         
+
+         // this is the id of the form
+         $("#formAnalyze").submit(function(e) {
+
+            $('#btnAnalyzeText').text('Analyzing...');
+            $('#btnAnalyzeSearch').hide();
+            $('#btnAnalyzeSpin').show();
+            $("#resultIllustration").height(0);         
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.    
+
+            var form = $(this);
+            var actionUrl = form.attr('action');
+            var cWidth = $(window).width();
+            $.ajax({
+               type: "POST",
+               url: actionUrl,
+               data: form.serialize(), // serializes the form's elements.
+               success: function(data)
+               {
+                  // console.log(data);
+                  $('.container-result').show();
+                  // $('#resultIllustration').addClass('ri-size-bigger'); 
+                  $('#resultIllustration').animate({
+                     height: "400px",
+                  },{
+                     duration:700,
+                     step:function(){
+                        // SET BREAKPOINTS
+                        // console.log(cWidth);
+                        if(cWidth<768){
+                           $('#resultIllustration').animate({                              
+                              height: "300px",
+                           });
+                        }                        
+                        if(cWidth<576){
+                           $('#resultIllustration').animate({                              
+                              height: "200px",
+                           });
+                        }
+                        if(cWidth<250){
+                           $('#resultIllustration').animate({                              
+                              height: "100px",
+                           });
+                        }                        
+                     }
+                  }); 
+
+                  if(data == "0"){
+                     $("#resultIllustration").attr('src','/static/images/negative-illustration.png');
+                     $("#resultText").text('NEGATIVE');
+                     $("#resultLine").removeClass("under-text-line-p");
+                     $("#resultLine").addClass("under-text-line-n");
+                  } else {
+                     $("#resultIllustration").attr('src','/static/images/positive-illustration.png');
+                     $("#resultText").text('POSITIVE');
+                     $("#resultLine").removeClass("under-text-line-n");
+                     $("#resultLine").addClass("under-text-line-p");
+                  }
+
+
+                  $('html, body').animate({
+                     scrollTop: $("#result").offset().top
+                  }, 600);   
+                  
+                  $('#btnAnalyzeText').text('Analyze');
+                  $('#btnAnalyzeSearch').show();
+                  $('#btnAnalyzeSpin').hide();                    
+               }
+            });
+            
+         });                           
+      </script>
+   </body>
+</html>
