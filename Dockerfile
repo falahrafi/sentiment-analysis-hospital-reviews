@@ -11,8 +11,8 @@ COPY requirements.txt nltk.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python -m nltk.downloader -d /usr/local/share/nltk_data -r nltk.txt
 
-# Copy the runtime.txt and Procfile file into the container at /app
-COPY runtime.txt Procfile ./
+# Copy the runtime.txt file into the container at /app
+COPY runtime.txt ./
 
 # Set environment variable for python runtime
 ENV PYTHON_RUNTIME=$(cat runtime.txt)
@@ -23,5 +23,5 @@ EXPOSE 5000
 # Copy the rest of the application code into the container at /app
 COPY . .
 
-# Run the command specified in Procfile to start the Flask app
-CMD honcho start
+# Run the command to start the Flask app
+CMD python${PYTHON_RUNTIME} app.py
