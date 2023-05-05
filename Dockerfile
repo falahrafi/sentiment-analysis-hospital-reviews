@@ -10,8 +10,8 @@ COPY requirements.txt nltk.txt ./
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install nltk packages
-RUN python -m nltk.downloader all
+# Install NLTK packages listed in nltk.txt
+RUN python -m nltk.downloader -d /usr/local/share/nltk_data $(cat nltk.txt)
 
 # Copy the runtime.txt file into the container at /app
 # COPY runtime.txt ./
