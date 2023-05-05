@@ -26,4 +26,4 @@ EXPOSE 5000
 COPY . .
 
 # Run the command to start the Flask app
-CMD python${PYTHON_RUNTIME} app.py
+CMD python app.py
