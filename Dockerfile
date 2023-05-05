@@ -12,10 +12,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN python -m nltk.downloader -d /usr/local/share/nltk_data -r nltk.txt
 
 # Copy the runtime.txt file into the container at /app
-COPY runtime.txt ./
+# COPY runtime.txt ./
 
 # Set environment variable for python runtime
-ENV PYTHON_RUNTIME=$(cat runtime.txt)
+# ENV PYTHON_RUNTIME=$(cat runtime.txt)
 
 # Expose port 5000 for the Flask app
 EXPOSE 5000
